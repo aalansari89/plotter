@@ -9,11 +9,8 @@ import io
 import base64
 import plotly.express as px
 
-
 # Import colorscale list
 colorscales = px.colors.named_colorscales()
-
-user_df=[]
 
 # Setup chart settings form
 chart_settings = html.Div(
@@ -115,7 +112,7 @@ chart_settings = html.Div(
                 html.P("Select Number of Contours:"), width=2
             ),
             dbc.Col(
-                dbc.Input(type="number", min=5, max=30, step=1,value=15,id="contour-slider"), width=3
+                dbc.Input(type="number", min=5, max=30, step=1, value=15, id="contour-slider"), width=3
             ),
             dbc.Col(
                 html.P("Select Mesh Levels:"), width=2
@@ -126,10 +123,9 @@ chart_settings = html.Div(
         ]),
 
         dbc.Row(
-            [dbc.Col(html.Button("Download Excel", id="btn_xlsx"),),
-            dbc.Col(dcc.Download(id="download-dataframe-xlsx"),),]
-),
-
+            [dbc.Col(html.Button("Download Excel", id="btn_xlsx"), ),
+             dbc.Col(dcc.Download(id="download-dataframe-xlsx"), ), ]
+        ),
 
     ]
 )
@@ -198,7 +194,7 @@ app.layout = dbc.Container([
     Input('grid_method', 'value'),
     State('upload-data', 'filename'),
 )
-def update_output(contents, scale, title, x_title, y_title, gaps, smoos, num_contours, meshes,grid, filename, ):
+def update_output(contents, scale, title, x_title, y_title, gaps, smoos, num_contours, meshes, grid, filename, ):
     if contents is not None:
         gaps = gaps[0]
         content_type, content_string = contents.split(',')
@@ -268,9 +264,10 @@ def update_output(contents, scale, title, x_title, y_title, gaps, smoos, num_con
             tickfont=dict(size=15),
         )
 
-        return fig,data_to_store
+        return fig, data_to_store
 
     return go.Figure(), None
+
 
 @app.callback(
     Output("download-dataframe-xlsx", "data"),
@@ -278,11 +275,12 @@ def update_output(contents, scale, title, x_title, y_title, gaps, smoos, num_con
     State('stored-data', 'data'),
     prevent_initial_call=True,
 )
-def func(n_clicks,stored_data):
+def func(n_clicks, stored_data):
     if stored_data is not None:
         # Convert the stored data back to DataFrame
         df_to_download = pd.DataFrame(stored_data)
-        return dcc.send_data_frame(df_to_download.to_excel, "mydf.xlsx",)
+        return dcc.send_data_frame(df_to_download.to_excel, "mydf.xlsx", )
+
 
 # Run the app
 if __name__ == '__main__':
