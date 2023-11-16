@@ -288,8 +288,7 @@ def func(n_clicks, stored_data):
     if stored_data is not None:
         # Convert the stored data back to DataFrame
         df_to_download = pd.DataFrame(stored_data)
-        return dcc.send_data_frame(df_to_download.to_excel, "mydf.xlsx", )
-
+        return dcc.send_data_frame(df_to_download.to_excel, "mesh.xlsx", )
 
 # Run the app
 if __name__ == '__main__':
