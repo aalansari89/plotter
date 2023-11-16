@@ -122,8 +122,17 @@ chart_settings = html.Div(
             ),
         ]),
 
+
+        html.Br(),
+        html.Hr(),
         dbc.Row(
-            [dbc.Col(html.Button("Download Excel", id="btn_xlsx"), ),
+            [
+                html.Div(
+                    [
+                        dbc.Button("Export Mesh to Excel", color="warning",id="btn_xlsx"),
+                    ],
+                    className="d-grid gap-2",
+                ),
              dbc.Col(dcc.Download(id="download-dataframe-xlsx"), ), ]
         ),
 
